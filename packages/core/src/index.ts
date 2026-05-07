@@ -166,6 +166,16 @@ export {
   type SearchTextOptions,
   type SearchHit,
 } from "./operations/searchText.js";
+export {
+  getBookmarks,
+  GetBookmarksSchema,
+  type BookmarkNode,
+} from "./operations/getBookmarks.js";
+export {
+  setBookmarks,
+  SetBookmarksSchema,
+  BookmarkNodeSchema,
+} from "./operations/setBookmarks.js";
 
 // Add new operations here. The same name shows up in three places:
 //  - this barrel file
