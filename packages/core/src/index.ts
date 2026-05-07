@@ -119,6 +119,7 @@ export {
   type PdfPermissions,
   type PdfSecurity,
 } from "./operations/encryptPdf.js";
+export { decryptPdf, DecryptPdfSchema } from "./operations/decryptPdf.js";
 
 // Add new operations here. The same name shows up in three places:
 //  - this barrel file
