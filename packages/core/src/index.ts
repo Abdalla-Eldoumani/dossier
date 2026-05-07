@@ -21,6 +21,7 @@ export {
   InsertPagesFromPdfSchema,
 } from "./operations/insertPagesFromPdf.js";
 export { duplicatePages, DuplicatePagesSchema } from "./operations/duplicatePages.js";
+export { cropPages, CropPagesSchema, PageRegionSchema } from "./operations/cropPages.js";
 
 // Add new operations here. The same name shows up in three places:
 //  - this barrel file
