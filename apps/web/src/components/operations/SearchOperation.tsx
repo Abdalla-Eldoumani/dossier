@@ -6,6 +6,7 @@ import { Search } from "lucide-react";
 import type { SearchHit } from "@dossier/core";
 import { useAppStore } from "@/lib/store";
 import { usePdfWorker } from "@/lib/usePdfWorker";
+import { announce } from "@/lib/announce";
 import { cn } from "@/lib/cn";
 
 export function SearchOperation() {
@@ -23,6 +24,7 @@ export function SearchOperation() {
     try {
       const result = await worker.searchText(staged.bytes, query, { caseSensitive });
       setHits(result);
+      announce(`${result.length} ${result.length === 1 ? "match" : "matches"} for ${query}.`);
     } catch (err) {
       toast.error("Search failed.", {
         description: err instanceof Error ? err.message : String(err),
