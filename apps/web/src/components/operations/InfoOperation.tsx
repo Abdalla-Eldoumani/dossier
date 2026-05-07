@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import type { PdfInfo, PdfInventory } from "@dossier/core";
 import { useAppStore } from "@/lib/store";
 import { usePdfWorker } from "@/lib/usePdfWorker";
+import { announce } from "@/lib/announce";
 import { cn } from "@/lib/cn";
 
 interface InfoData {
@@ -20,9 +21,13 @@ export function InfoOperation() {
   useEffect(() => {
     if (!staged || !worker) return;
     let cancelled = false;
+    announce("Inspecting PDF…");
     Promise.all([worker.getInfo(staged.bytes), worker.getInventory(staged.bytes)])
       .then(([info, inventory]) => {
-        if (!cancelled) setData({ info, inventory });
+        if (!cancelled) {
+          setData({ info, inventory });
+          announce(`Inspection ready. ${info.pageCount} pages, ${inventory.fonts.length} fonts.`);
+        }
       })
       .catch((err: unknown) => {
         if (cancelled) return;
