@@ -7,6 +7,7 @@ import { StandardFonts, rgb } from "pdf-lib";
 import type { PDFInput, PDFOutput } from "../types/index.js";
 import { loadPdf } from "../internal/loadPdf.js";
 import { savePdf } from "../internal/savePdf.js";
+import { resolvePosition } from "../internal/positioning.js";
 import { PositionSchema, type Position } from "./addWatermark.js";
 
 export const PageNumberOptionsSchema = z.object({
@@ -32,44 +33,6 @@ const FONT_MAP: Record<string, StandardFonts> = {
   TimesRoman: StandardFonts.TimesRoman,
   Courier: StandardFonts.Courier,
 };
-
-const MARGIN = 36;
-
-function resolvePosition(
-  position: Position,
-  pw: number,
-  ph: number,
-  w: number,
-  h: number,
-): { x: number; y: number } {
-  if (typeof position !== "string") return position;
-  const left = MARGIN;
-  const right = pw - MARGIN - w;
-  const middleX = (pw - w) / 2;
-  const top = ph - MARGIN - h;
-  const middleY = (ph - h) / 2;
-  const bottom = MARGIN;
-  switch (position) {
-    case "top-left":
-      return { x: left, y: top };
-    case "top-center":
-      return { x: middleX, y: top };
-    case "top-right":
-      return { x: right, y: top };
-    case "middle-left":
-      return { x: left, y: middleY };
-    case "center":
-      return { x: middleX, y: middleY };
-    case "middle-right":
-      return { x: right, y: middleY };
-    case "bottom-left":
-      return { x: left, y: bottom };
-    case "bottom-center":
-      return { x: middleX, y: bottom };
-    case "bottom-right":
-      return { x: right, y: bottom };
-  }
-}
 
 export async function addPageNumbers(
   input: PDFInput,
