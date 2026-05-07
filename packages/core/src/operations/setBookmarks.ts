@@ -4,7 +4,7 @@
 // removes the outline entirely.
 
 import { z } from "zod";
-import { PDFDict, PDFName, PDFNumber, PDFRef, PDFString } from "pdf-lib";
+import { PDFArray, PDFDict, PDFName, PDFNumber, PDFRef, PDFString } from "pdf-lib";
 import type { PDFDocument } from "pdf-lib";
 import type { PDFInput, PDFOutput } from "../types/index.js";
 import { OperationError } from "../types/errors.js";
@@ -28,11 +28,15 @@ interface BuildResult {
   visibleDescendants: number;
 }
 
-function destForPage(doc: PDFDocument, pageIndex: number): unknown {
+function makeDict(doc: PDFDocument): PDFDict {
+  return doc.context.obj({}) as PDFDict;
+}
+
+function makeDestArray(doc: PDFDocument, pageIndex: number): PDFArray | undefined {
   const pages = doc.getPages();
   const page = pages[pageIndex];
   if (!page) return undefined;
-  return doc.context.obj([page.ref, PDFName.of("Fit")]);
+  return doc.context.obj([page.ref, PDFName.of("Fit")]) as PDFArray;
 }
 
 function buildSiblings(
@@ -43,25 +47,18 @@ function buildSiblings(
   const dicts: PDFDict[] = [];
   const refs: PDFRef[] = [];
   for (const node of siblings) {
-    const dest =
-      node.pageIndex !== undefined ? destForPage(doc, node.pageIndex) : undefined;
-    const dict = doc.context.obj({
-      Title: PDFString.of(node.title),
-      Parent: parentRef,
-      ...(dest ? { Dest: dest } : {}),
-    });
-    if (!(dict instanceof PDFDict)) {
-      throw new OperationError(
-        "OPERATION_FAILED",
-        "Could not construct outline item dict.",
-      );
+    const dict = makeDict(doc);
+    dict.set(PDFName.of("Title"), PDFString.of(node.title));
+    dict.set(PDFName.of("Parent"), parentRef);
+    if (node.pageIndex !== undefined) {
+      const dest = makeDestArray(doc, node.pageIndex);
+      if (dest) dict.set(PDFName.of("Dest"), dest);
     }
     const ref = doc.context.register(dict);
     dicts.push(dict);
     refs.push(ref);
   }
 
-  // Sibling links
   for (let i = 0; i < dicts.length; i++) {
     if (i > 0) dicts[i]!.set(PDFName.of("Prev"), refs[i - 1]!);
     if (i < dicts.length - 1) dicts[i]!.set(PDFName.of("Next"), refs[i + 1]!);
@@ -74,10 +71,7 @@ function buildSiblings(
       const child = buildSiblings(doc, node.children, refs[i]!);
       dicts[i]!.set(PDFName.of("First"), child.firstRef);
       dicts[i]!.set(PDFName.of("Last"), child.lastRef);
-      dicts[i]!.set(
-        PDFName.of("Count"),
-        PDFNumber.of(child.visibleDescendants),
-      );
+      dicts[i]!.set(PDFName.of("Count"), PDFNumber.of(child.visibleDescendants));
       descendants += child.visibleDescendants;
     }
   }
@@ -110,13 +104,8 @@ export async function setBookmarks(
     });
   }
 
-  const rootDict = doc.context.obj({ Type: "Outlines" });
-  if (!(rootDict instanceof PDFDict)) {
-    throw new OperationError(
-      "OPERATION_FAILED",
-      "Could not construct outline root dict.",
-    );
-  }
+  const rootDict = makeDict(doc);
+  rootDict.set(PDFName.of("Type"), PDFName.of("Outlines"));
   const rootRef = doc.context.register(rootDict);
 
   const built = buildSiblings(doc, bookmarks, rootRef);
