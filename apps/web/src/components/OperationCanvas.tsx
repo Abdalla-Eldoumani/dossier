@@ -5,6 +5,7 @@ import { OPERATIONS } from "@/lib/operations";
 import { DropZone } from "@/components/DropZone";
 import { FileBadge } from "@/components/FileBadge";
 import { OperationPlaceholder } from "@/components/OperationPlaceholder";
+import { OPERATION_VIEWS } from "@/components/operations/registry";
 import { cn } from "@/lib/cn";
 
 export function OperationCanvas() {
@@ -38,10 +39,10 @@ export function OperationCanvas() {
       {staged ? (
         <div className="space-y-6">
           <FileBadge />
-          {/* Operation-specific component goes here.
-              For now, render the placeholder. Each operation will have its own view
-              in src/components/operations/ that replaces this. */}
-          <OperationPlaceholder operationId={op.id} />
+          {(() => {
+            const View = OPERATION_VIEWS[op.id];
+            return View ? <View /> : <OperationPlaceholder operationId={op.id} />;
+          })()}
         </div>
       ) : (
         <div className="space-y-6">
