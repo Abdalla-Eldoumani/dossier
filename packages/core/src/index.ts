@@ -67,6 +67,14 @@ export {
   type PdfToMarkdownResult,
 } from "./operations/pdfToMarkdown.js";
 
+// Operations — forms
+export {
+  getFormFields,
+  GetFormFieldsSchema,
+  type FormField,
+  type FormFieldType,
+} from "./operations/getFormFields.js";
+
 // Add new operations here. The same name shows up in three places:
 //  - this barrel file
 //  - apps/mcp-server/src/tools/<name>.ts
