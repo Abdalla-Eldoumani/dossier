@@ -74,6 +74,11 @@ export {
   type FormField,
   type FormFieldType,
 } from "./operations/getFormFields.js";
+export {
+  fillForm,
+  FillFormSchema,
+  type FillFormValues,
+} from "./operations/fillForm.js";
 
 // Add new operations here. The same name shows up in three places:
 //  - this barrel file
