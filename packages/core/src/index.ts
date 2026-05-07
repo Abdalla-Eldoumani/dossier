@@ -16,6 +16,10 @@ export {
   InsertBlankPageSchema,
   PageSizeSchema,
 } from "./operations/insertBlankPage.js";
+export {
+  insertPagesFromPdf,
+  InsertPagesFromPdfSchema,
+} from "./operations/insertPagesFromPdf.js";
 
 // Add new operations here. The same name shows up in three places:
 //  - this barrel file
