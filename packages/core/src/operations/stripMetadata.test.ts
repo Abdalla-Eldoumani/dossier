@@ -66,4 +66,9 @@ describe("stripMetadata", () => {
     const out = await stripMetadata(input);
     expect(out.meta.operation).toBe("strip-metadata");
   });
+
+  it("rejects non-PDF input", async () => {
+    const garbage = new TextEncoder().encode("not a pdf");
+    await expect(stripMetadata(garbage)).rejects.toThrow();
+  });
 });
