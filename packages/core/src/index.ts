@@ -11,6 +11,11 @@ export { extractPages, ExtractPagesSchema } from "./operations/extractPages.js";
 export { reorderPages, ReorderPagesSchema } from "./operations/reorderPages.js";
 export { rotatePages, RotatePagesSchema } from "./operations/rotatePages.js";
 export { deletePages, DeletePagesSchema } from "./operations/deletePages.js";
+export {
+  insertBlankPage,
+  InsertBlankPageSchema,
+  PageSizeSchema,
+} from "./operations/insertBlankPage.js";
 
 // Add new operations here. The same name shows up in three places:
 //  - this barrel file
