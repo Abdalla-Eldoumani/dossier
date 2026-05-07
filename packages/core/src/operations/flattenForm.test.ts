@@ -43,4 +43,9 @@ describe("flattenForm", () => {
     );
     expect(out.meta.notes?.some((n) => /No form fields present/.test(n))).toBe(true);
   });
+
+  it("rejects non-PDF input", async () => {
+    const garbage = new TextEncoder().encode("not a pdf");
+    await expect(flattenForm(garbage)).rejects.toThrow();
+  });
 });
