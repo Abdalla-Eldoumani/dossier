@@ -15,6 +15,10 @@ const nextConfig: NextConfig = {
 
   // Strictest mode.
   reactStrictMode: true,
+
+  // Ship source maps for the production bundle so Lighthouse "valid-source-maps"
+  // passes and so anyone debugging the static export gets readable stack traces.
+  productionBrowserSourceMaps: true,
 };
 
 export default nextConfig;
