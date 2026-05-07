@@ -191,6 +191,11 @@ export {
   type FontInventoryItem,
   type ImageInventoryItem,
 } from "./operations/getInventory.js";
+export {
+  repair,
+  RepairSchema,
+  type PdfRepairer,
+} from "./operations/repair.js";
 
 // Add new operations here. The same name shows up in three places:
 //  - this barrel file
