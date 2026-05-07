@@ -159,6 +159,13 @@ export {
   type OcrPageResult,
   type OcrWord,
 } from "./operations/runOcr.js";
+export {
+  searchText,
+  SearchTextSchema,
+  SearchTextOptionsSchema,
+  type SearchTextOptions,
+  type SearchHit,
+} from "./operations/searchText.js";
 
 // Add new operations here. The same name shows up in three places:
 //  - this barrel file
