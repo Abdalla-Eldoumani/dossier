@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "sonner";
+import { AriaLiveRegion } from "@/components/AriaLiveRegion";
+import { KeyboardShortcuts } from "@/components/KeyboardShortcuts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -38,6 +40,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           disableTransitionOnChange
         >
           {children}
+          <KeyboardShortcuts />
+          <AriaLiveRegion />
           <Toaster
             position="bottom-right"
             toastOptions={{
