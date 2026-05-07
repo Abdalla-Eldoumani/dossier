@@ -35,4 +35,9 @@ describe("addPageNumbers", () => {
     const out = await addPageNumbers(input, { format: "{n}", startAt: 5 });
     expect(out.meta.pageCount).toBe(2);
   });
+
+  it("rejects non-PDF input", async () => {
+    const garbage = new TextEncoder().encode("not a pdf");
+    await expect(addPageNumbers(garbage, { format: "{n}" })).rejects.toThrow();
+  });
 });
