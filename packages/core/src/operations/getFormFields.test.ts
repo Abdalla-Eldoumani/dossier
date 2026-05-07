@@ -67,4 +67,9 @@ describe("getFormFields", () => {
     );
     expect(fields).toEqual([]);
   });
+
+  it("rejects non-PDF input", async () => {
+    const garbage = new TextEncoder().encode("not a pdf");
+    await expect(getFormFields(garbage)).rejects.toThrow();
+  });
 });
