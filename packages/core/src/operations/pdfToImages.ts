@@ -59,11 +59,7 @@ export async function pdfToImages(
   const dpi = options.dpi ?? 150;
   const scale = dpi / POINTS_PER_INCH;
 
-  const loadingTask = getDocument({
-    data: bytes,
-    isEvalSupported: false,
-    useSystemFonts: false,
-  });
+  const loadingTask = getDocument({ data: bytes });
 
   let doc;
   try {
