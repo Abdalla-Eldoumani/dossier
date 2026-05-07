@@ -61,4 +61,9 @@ describe("getBookmarks", () => {
     expect(got[0]?.title).toBe("Index");
     expect(got[0]?.pageIndex).toBeUndefined();
   });
+
+  it("rejects non-PDF input", async () => {
+    const garbage = new TextEncoder().encode("not a pdf");
+    await expect(getBookmarks(garbage)).rejects.toThrow();
+  });
 });
