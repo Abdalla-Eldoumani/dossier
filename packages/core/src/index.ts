@@ -81,6 +81,14 @@ export {
 } from "./operations/fillForm.js";
 export { flattenForm, FlattenFormSchema } from "./operations/flattenForm.js";
 
+// Operations — annotations
+export {
+  addTextAnnotation,
+  AddTextAnnotationSchema,
+  TextAnnotationOptionsSchema,
+  type TextAnnotationOptions,
+} from "./operations/addTextAnnotation.js";
+
 // Add new operations here. The same name shows up in three places:
 //  - this barrel file
 //  - apps/mcp-server/src/tools/<name>.ts
