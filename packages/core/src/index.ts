@@ -126,6 +126,7 @@ export {
   SetPermissionsOptionsSchema,
   type SetPermissionsOptions,
 } from "./operations/setPermissions.js";
+export { stripMetadata, StripMetadataSchema } from "./operations/stripMetadata.js";
 
 // Add new operations here. The same name shows up in three places:
 //  - this barrel file
