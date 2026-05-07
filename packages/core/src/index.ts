@@ -20,6 +20,7 @@ export {
   insertPagesFromPdf,
   InsertPagesFromPdfSchema,
 } from "./operations/insertPagesFromPdf.js";
+export { duplicatePages, DuplicatePagesSchema } from "./operations/duplicatePages.js";
 
 // Add new operations here. The same name shows up in three places:
 //  - this barrel file
