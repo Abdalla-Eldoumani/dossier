@@ -43,6 +43,9 @@ export {
   type JpegRecompressor,
 } from "./operations/compressPdf.js";
 
+// Operations — conversion
+export { imagesToPdf, ImagesToPdfSchema } from "./operations/imagesToPdf.js";
+
 // Add new operations here. The same name shows up in three places:
 //  - this barrel file
 //  - apps/mcp-server/src/tools/<name>.ts
