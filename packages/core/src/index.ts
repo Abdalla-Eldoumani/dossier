@@ -140,6 +140,12 @@ export {
   type FontSubsetter,
   type FontSubsetterReport,
 } from "./operations/subsetFonts.js";
+export {
+  downsampleImages,
+  DownsampleImagesSchema,
+  type ImageDownsampler,
+  type ImageStreamFormat,
+} from "./operations/downsampleImages.js";
 
 // Add new operations here. The same name shows up in three places:
 //  - this barrel file
