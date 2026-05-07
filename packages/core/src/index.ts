@@ -6,6 +6,7 @@ export * from "./types/errors.js";
 // Operations — pages
 export { mergePdfs, MergeOptionsSchema } from "./operations/merge.js";
 export { splitByPageCount, SplitByPageCountSchema } from "./operations/splitByPageCount.js";
+export { splitByRanges, SplitByRangesSchema, PageRangeSchema } from "./operations/splitByRanges.js";
 
 // Add new operations here. The same name shows up in three places:
 //  - this barrel file
