@@ -60,6 +60,12 @@ export {
   type PageRenderInput,
   type ImageFormat,
 } from "./operations/pdfToImages.js";
+export {
+  pdfToMarkdown,
+  PdfToMarkdownSchema,
+  type PdfToMarkdownOptions,
+  type PdfToMarkdownResult,
+} from "./operations/pdfToMarkdown.js";
 
 // Add new operations here. The same name shows up in three places:
 //  - this barrel file
