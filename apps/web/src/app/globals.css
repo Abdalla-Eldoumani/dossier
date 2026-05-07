@@ -1,0 +1,145 @@
+@import "tailwindcss";
+
+/* Variable fonts. Bundled with the static export — no Google Fonts request, no leak of which page the user is on. */
+@import "@fontsource-variable/fraunces";
+@import "@fontsource-variable/geist";
+@import "@fontsource-variable/geist-mono";
+
+/* ---- Design tokens ----
+   The colour, typography, spacing, and motion tokens for the whole app. Update here, not in components. */
+
+@theme {
+  /* Light theme tokens (default) */
+  --color-paper:        #F8F4ED;
+  --color-paper-2:      #F1ECE1;
+  --color-paper-3:      #E8E2D4;
+  --color-ink:          #1A1612;
+  --color-ink-2:        #4A4138;
+  --color-ink-3:        #8A7F70;
+  --color-rule:         #D9D2C2;
+  --color-rule-2:       #C9C0AC;
+  --color-accent:       #B8421C;
+  --color-accent-ink:   #FBF8F1;
+  --color-accent-soft:  #F4E4DD;
+  --color-success:      #3F6E3A;
+  --color-warning:      #8B6914;
+  --color-danger:       #8B1A1A;
+
+  --font-display:       "Fraunces Variable", "Fraunces", Georgia, serif;
+  --font-ui:            "Geist Variable", "Geist", -apple-system, "Segoe UI", sans-serif;
+  --font-mono:          "Geist Mono Variable", "Geist Mono", ui-monospace, monospace;
+
+  --radius-sm:   4px;
+  --radius:      8px;
+  --radius-lg:   12px;
+  --radius-xl:   20px;
+  --radius-full: 999px;
+
+  --shadow-1: 0 1px 2px rgba(26, 22, 18, 0.04), 0 1px 1px rgba(26, 22, 18, 0.03);
+  --shadow-2: 0 2px 8px rgba(26, 22, 18, 0.06), 0 1px 2px rgba(26, 22, 18, 0.04);
+  --shadow-3: 0 8px 32px rgba(26, 22, 18, 0.08), 0 2px 8px rgba(26, 22, 18, 0.05);
+
+  /* Editorial out-curve. Use for all transitions except spring physics. */
+  --ease-editorial: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+/* Dark theme overrides. Triggered by [data-theme="dark"] from next-themes. */
+:root[data-theme="dark"] {
+  --color-paper:        #14110D;
+  --color-paper-2:      #1E1A14;
+  --color-paper-3:      #2A241B;
+  --color-ink:          #F4EFE4;
+  --color-ink-2:        #C9BFAA;
+  --color-ink-3:        #897F6C;
+  --color-rule:         #2E2820;
+  --color-rule-2:       #423A2E;
+  --color-accent:       #D86A3D;
+  --color-accent-ink:   #14110D;
+  --color-accent-soft:  #2D1F18;
+  --color-success:      #6BA764;
+  --color-warning:      #C19932;
+  --color-danger:       #C24545;
+}
+
+/* Global base styles */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* Improve text rendering, especially for variable fonts. */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-ui);
+  font-size: 15px;
+  line-height: 1.55;
+  margin: 0;
+  min-height: 100dvh;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+::selection {
+  background: var(--color-accent-soft);
+  color: var(--color-ink);
+}
+
+/* Headings default to the display family. */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-variation-settings: "SOFT" 100;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+
+code, pre, kbd, samp {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+/* Hairlines look right in both themes by binding to var(--color-rule). */
+hr {
+  border: 0;
+  border-top: 1px solid var(--color-rule);
+  margin: 0;
+}
+
+/* Reduced motion: collapse every animation to near-zero so transitions still fire and finish, but instantly. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Forced colors mode — make sure interactive elements have system-defined borders for visibility. */
+@media (forced-colors: active) {
+  button,
+  [role="button"],
+  input,
+  select,
+  textarea {
+    border: 1px solid ButtonBorder;
+  }
+}
+
+/* Focus rings are part of the brand. Use the editorial accent. */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
