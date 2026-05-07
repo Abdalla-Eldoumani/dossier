@@ -24,6 +24,15 @@ export { duplicatePages, DuplicatePagesSchema } from "./operations/duplicatePage
 export { cropPages, CropPagesSchema, PageRegionSchema } from "./operations/cropPages.js";
 export { resizePages, ResizePagesSchema } from "./operations/resizePages.js";
 
+// Operations — content
+export {
+  addWatermark,
+  WatermarkSchema,
+  TextWatermarkSchema,
+  ImageWatermarkSchema,
+  PositionSchema,
+} from "./operations/addWatermark.js";
+
 // Add new operations here. The same name shows up in three places:
 //  - this barrel file
 //  - apps/mcp-server/src/tools/<name>.ts
