@@ -35,6 +35,7 @@ export {
 export { addPageNumbers, PageNumberOptionsSchema } from "./operations/addPageNumbers.js";
 export { addHeaderFooter, HeaderFooterOptionsSchema } from "./operations/addHeaderFooter.js";
 export { redactRegion, RedactRegionSchema } from "./operations/redactRegion.js";
+export { compressPdf, CompressPdfSchema, type CompressLevel } from "./operations/compressPdf.js";
 
 // Add new operations here. The same name shows up in three places:
 //  - this barrel file
