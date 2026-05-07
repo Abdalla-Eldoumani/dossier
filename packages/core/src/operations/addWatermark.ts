@@ -9,6 +9,7 @@ import type { PDFInput, PDFOutput } from "../types/index.js";
 import { OperationError } from "../types/errors.js";
 import { loadPdf } from "../internal/loadPdf.js";
 import { savePdf } from "../internal/savePdf.js";
+import { resolvePosition } from "../internal/positioning.js";
 
 const NamedAnchor = z.enum([
   "top-left",
@@ -61,58 +62,6 @@ export const WatermarkSchema = z.discriminatedUnion("kind", [
 export type Watermark = z.infer<typeof WatermarkSchema>;
 export type Position = z.infer<typeof PositionSchema>;
 
-const MARGIN = 36; // 0.5 inch in points
-
-function anchorOffset(
-  anchor: z.infer<typeof NamedAnchor>,
-  pageWidth: number,
-  pageHeight: number,
-  contentWidth: number,
-  contentHeight: number,
-): { x: number; y: number } {
-  const left = MARGIN;
-  const right = pageWidth - MARGIN - contentWidth;
-  const middleX = (pageWidth - contentWidth) / 2;
-  const top = pageHeight - MARGIN - contentHeight;
-  const middleY = (pageHeight - contentHeight) / 2;
-  const bottom = MARGIN;
-
-  switch (anchor) {
-    case "top-left":
-      return { x: left, y: top };
-    case "top-center":
-      return { x: middleX, y: top };
-    case "top-right":
-      return { x: right, y: top };
-    case "middle-left":
-      return { x: left, y: middleY };
-    case "center":
-      return { x: middleX, y: middleY };
-    case "middle-right":
-      return { x: right, y: middleY };
-    case "bottom-left":
-      return { x: left, y: bottom };
-    case "bottom-center":
-      return { x: middleX, y: bottom };
-    case "bottom-right":
-      return { x: right, y: bottom };
-  }
-}
-
-function resolvePosition(
-  position: Position | undefined,
-  pageWidth: number,
-  pageHeight: number,
-  contentWidth: number,
-  contentHeight: number,
-): { x: number; y: number } {
-  const value = position ?? "center";
-  if (typeof value === "string") {
-    return anchorOffset(value, pageWidth, pageHeight, contentWidth, contentHeight);
-  }
-  return value;
-}
-
 async function embedImage(doc: PDFDocument, bytes: Uint8Array): Promise<PDFImage> {
   if (bytes.length < 4) {
     throw new OperationError("INVALID_INPUT", "Watermark image is too small to identify.");
@@ -147,7 +96,7 @@ async function applyTextWatermark(
 
   for (const page of doc.getPages()) {
     const { width: pw, height: ph } = page.getSize();
-    const { x, y } = resolvePosition(spec.position, pw, ph, textWidth, textHeight);
+    const { x, y } = resolvePosition(spec.position ?? "center", pw, ph, textWidth, textHeight);
     page.drawText(spec.text, {
       x,
       y,
@@ -172,7 +121,7 @@ async function applyImageWatermark(
 
   for (const page of doc.getPages()) {
     const { width: pw, height: ph } = page.getSize();
-    const { x, y } = resolvePosition(spec.position, pw, ph, imgW, imgH);
+    const { x, y } = resolvePosition(spec.position ?? "center", pw, ph, imgW, imgH);
     page.drawImage(image, {
       x,
       y,
