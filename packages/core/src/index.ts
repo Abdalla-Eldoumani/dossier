@@ -79,6 +79,7 @@ export {
   FillFormSchema,
   type FillFormValues,
 } from "./operations/fillForm.js";
+export { flattenForm, FlattenFormSchema } from "./operations/flattenForm.js";
 
 // Add new operations here. The same name shows up in three places:
 //  - this barrel file
