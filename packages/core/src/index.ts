@@ -45,6 +45,12 @@ export {
 
 // Operations — conversion
 export { imagesToPdf, ImagesToPdfSchema } from "./operations/imagesToPdf.js";
+export {
+  pdfToText,
+  PdfToTextSchema,
+  type PdfToTextOptions,
+  type PdfToTextResult,
+} from "./operations/pdfToText.js";
 
 // Add new operations here. The same name shows up in three places:
 //  - this barrel file
