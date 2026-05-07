@@ -134,6 +134,12 @@ export {
   LinearizePdfSchema,
   type PdfLinearizer,
 } from "./operations/linearizePdf.js";
+export {
+  subsetFonts,
+  SubsetFontsSchema,
+  type FontSubsetter,
+  type FontSubsetterReport,
+} from "./operations/subsetFonts.js";
 
 // Add new operations here. The same name shows up in three places:
 //  - this barrel file
