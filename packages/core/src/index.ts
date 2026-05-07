@@ -184,6 +184,13 @@ export {
   type PdfInfo,
   type PageInfo,
 } from "./operations/getInfo.js";
+export {
+  getInventory,
+  GetInventorySchema,
+  type PdfInventory,
+  type FontInventoryItem,
+  type ImageInventoryItem,
+} from "./operations/getInventory.js";
 
 // Add new operations here. The same name shows up in three places:
 //  - this barrel file
