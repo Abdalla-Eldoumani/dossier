@@ -126,14 +126,28 @@ hr {
   }
 }
 
-/* Forced colors mode — make sure interactive elements have system-defined borders for visibility. */
+/* Forced colors mode — make sure interactive elements stay legible against the
+   system palette. Browsers in this mode override most colors with system tokens
+   (ButtonText, ButtonFace, Highlight, etc.); the rules below add the borders
+   that get stripped, plus a clear active outline so the focused operation is
+   findable when the brand accent is replaced by SystemColor's Highlight. */
 @media (forced-colors: active) {
   button,
   [role="button"],
   input,
   select,
-  textarea {
+  textarea,
+  kbd {
     border: 1px solid ButtonBorder;
+  }
+  :focus-visible {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+  }
+  /* The Tailwind-generated focus rings can use currentColor; force them to a
+     reliable system token instead. */
+  hr {
+    border-top-color: ButtonBorder;
   }
 }
 
