@@ -2,7 +2,7 @@
 
 import { useTheme } from "next-themes";
 import { useSyncExternalStore } from "react";
-import { Sun, Moon, Menu } from "lucide-react";
+import { Sun, Moon, Menu, Keyboard } from "lucide-react";
 import { useAppStore } from "@/lib/store";
 import { cn } from "@/lib/cn";
 
@@ -54,6 +54,23 @@ export function Header() {
       </div>
 
       <div className="flex items-center gap-2">
+        <button
+          type="button"
+          aria-label="Show keyboard shortcuts"
+          title="Keyboard shortcuts (?)"
+          onClick={() => {
+            if (typeof window === "undefined") return;
+            window.dispatchEvent(new CustomEvent("dossier:toggle-shortcuts"));
+          }}
+          className={cn(
+            "hidden sm:inline-flex items-center justify-center w-9 h-9",
+            "rounded-[var(--radius-sm)] text-[var(--color-ink-2)]",
+            "hover:bg-[var(--color-paper-3)] transition-colors duration-150",
+          )}
+        >
+          <Keyboard size={18} strokeWidth={1.5} aria-hidden />
+        </button>
+
         <a
           href="https://github.com/your-handle/dossier"
           target="_blank"
