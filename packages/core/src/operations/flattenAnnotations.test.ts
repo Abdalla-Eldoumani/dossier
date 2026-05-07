@@ -66,4 +66,9 @@ describe("flattenAnnotations", () => {
     const out = await flattenAnnotations(bytes);
     expect(out.meta.notes?.[0]).toMatch(/Flattened 0 text and 0 highlight/);
   });
+
+  it("rejects non-PDF input", async () => {
+    const garbage = new TextEncoder().encode("not a pdf");
+    await expect(flattenAnnotations(garbage)).rejects.toThrow();
+  });
 });
