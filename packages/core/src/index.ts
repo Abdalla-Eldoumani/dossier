@@ -94,6 +94,16 @@ export {
   HighlightOptionsSchema,
   type HighlightOptions,
 } from "./operations/addHighlight.js";
+export {
+  addStamp,
+  AddStampSchema,
+  StampSchema,
+  StampOptionsSchema,
+  BUILTIN_STAMPS,
+  type Stamp,
+  type StampOptions,
+  type BuiltinStampName,
+} from "./operations/addStamp.js";
 
 // Add new operations here. The same name shows up in three places:
 //  - this barrel file
