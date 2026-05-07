@@ -34,6 +34,7 @@ export {
 } from "./operations/addWatermark.js";
 export { addPageNumbers, PageNumberOptionsSchema } from "./operations/addPageNumbers.js";
 export { addHeaderFooter, HeaderFooterOptionsSchema } from "./operations/addHeaderFooter.js";
+export { redactRegion, RedactRegionSchema } from "./operations/redactRegion.js";
 
 // Add new operations here. The same name shows up in three places:
 //  - this barrel file
