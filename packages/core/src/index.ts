@@ -32,6 +32,7 @@ export {
   ImageWatermarkSchema,
   PositionSchema,
 } from "./operations/addWatermark.js";
+export { addPageNumbers, PageNumberOptionsSchema } from "./operations/addPageNumbers.js";
 
 // Add new operations here. The same name shows up in three places:
 //  - this barrel file
