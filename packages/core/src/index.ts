@@ -128,6 +128,13 @@ export {
 } from "./operations/setPermissions.js";
 export { stripMetadata, StripMetadataSchema } from "./operations/stripMetadata.js";
 
+// Operations — optimisation
+export {
+  linearizePdf,
+  LinearizePdfSchema,
+  type PdfLinearizer,
+} from "./operations/linearizePdf.js";
+
 // Add new operations here. The same name shows up in three places:
 //  - this barrel file
 //  - apps/mcp-server/src/tools/<name>.ts
