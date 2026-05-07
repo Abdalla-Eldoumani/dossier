@@ -147,6 +147,19 @@ export {
   type ImageStreamFormat,
 } from "./operations/downsampleImages.js";
 
+// Operations — accessibility
+export {
+  runOcr,
+  RunOcrSchema,
+  RunOcrOptionsSchema,
+  type RunOcrOptions,
+  type OcrEngine,
+  type OcrEngineInput,
+  type OcrResult,
+  type OcrPageResult,
+  type OcrWord,
+} from "./operations/runOcr.js";
+
 // Add new operations here. The same name shows up in three places:
 //  - this barrel file
 //  - apps/mcp-server/src/tools/<name>.ts
