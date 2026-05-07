@@ -88,6 +88,12 @@ export {
   TextAnnotationOptionsSchema,
   type TextAnnotationOptions,
 } from "./operations/addTextAnnotation.js";
+export {
+  addHighlight,
+  AddHighlightSchema,
+  HighlightOptionsSchema,
+  type HighlightOptions,
+} from "./operations/addHighlight.js";
 
 // Add new operations here. The same name shows up in three places:
 //  - this barrel file
