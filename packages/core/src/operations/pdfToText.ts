@@ -32,11 +32,7 @@ export async function pdfToText(
 ): Promise<PdfToTextResult> {
   const bytes = toBytes(input);
 
-  const loadingTask = getDocument({
-    data: bytes,
-    isEvalSupported: false,
-    useSystemFonts: false,
-  });
+  const loadingTask = getDocument({ data: bytes });
 
   let doc;
   try {
