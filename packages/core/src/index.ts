@@ -51,6 +51,15 @@ export {
   type PdfToTextOptions,
   type PdfToTextResult,
 } from "./operations/pdfToText.js";
+export {
+  pdfToImages,
+  PdfToImagesSchema,
+  type PdfToImagesOptions,
+  type PdfToImagesResult,
+  type PageRenderer,
+  type PageRenderInput,
+  type ImageFormat,
+} from "./operations/pdfToImages.js";
 
 // Add new operations here. The same name shows up in three places:
 //  - this barrel file
