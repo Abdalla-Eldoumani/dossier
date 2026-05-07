@@ -60,11 +60,7 @@ export async function pdfToMarkdown(
 ): Promise<PdfToMarkdownResult> {
   const bytes = toBytes(input);
 
-  const loadingTask = getDocument({
-    data: bytes,
-    isEvalSupported: false,
-    useSystemFonts: false,
-  });
+  const loadingTask = getDocument({ data: bytes });
 
   let doc;
   try {
