@@ -109,6 +109,17 @@ export {
   FlattenAnnotationsSchema,
 } from "./operations/flattenAnnotations.js";
 
+// Operations — security
+export {
+  encryptPdf,
+  EncryptPdfSchema,
+  EncryptOptionsSchema,
+  PdfPermissionsSchema,
+  type EncryptOptions,
+  type PdfPermissions,
+  type PdfSecurity,
+} from "./operations/encryptPdf.js";
+
 // Add new operations here. The same name shows up in three places:
 //  - this barrel file
 //  - apps/mcp-server/src/tools/<name>.ts
