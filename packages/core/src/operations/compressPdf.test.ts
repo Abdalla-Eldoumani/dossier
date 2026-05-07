@@ -140,4 +140,9 @@ describe("compressPdf", () => {
       expect(out.bytes.byteLength).toBeLessThan(input.byteLength);
     }
   });
+
+  it("rejects non-PDF input", async () => {
+    const garbage = new TextEncoder().encode("not a pdf");
+    await expect(compressPdf(garbage)).rejects.toThrow();
+  });
 });
