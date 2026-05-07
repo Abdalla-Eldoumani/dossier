@@ -177,6 +177,14 @@ export {
   BookmarkNodeSchema,
 } from "./operations/setBookmarks.js";
 
+// Operations — diagnostics
+export {
+  getInfo,
+  GetInfoSchema,
+  type PdfInfo,
+  type PageInfo,
+} from "./operations/getInfo.js";
+
 // Add new operations here. The same name shows up in three places:
 //  - this barrel file
 //  - apps/mcp-server/src/tools/<name>.ts
