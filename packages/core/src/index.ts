@@ -104,6 +104,10 @@ export {
   type StampOptions,
   type BuiltinStampName,
 } from "./operations/addStamp.js";
+export {
+  flattenAnnotations,
+  FlattenAnnotationsSchema,
+} from "./operations/flattenAnnotations.js";
 
 // Add new operations here. The same name shows up in three places:
 //  - this barrel file
