@@ -9,6 +9,8 @@ import { randomUUID } from "node:crypto";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { registerAllTools } from "./tools/index.js";
+import { registerAllResources } from "./resources/index.js";
+import { registerAllPrompts } from "./prompts/index.js";
 import { log } from "./lib/log.js";
 
 const PORT = Number(process.env.PORT ?? 8923);
@@ -25,6 +27,8 @@ const ALLOWED_HOSTS = new Set([
 async function main() {
   const server = new McpServer({ name: "dossier", version: "0.1.0" });
   registerAllTools(server);
+  registerAllResources(server);
+  registerAllPrompts(server);
 
   const transport = new StreamableHTTPServerTransport({
     sessionIdGenerator: () => randomUUID(),
