@@ -24,6 +24,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # @dossier/core is consumed by both apps via its compiled `dist/index.d.ts`.
+      # On a fresh checkout that file doesn't exist yet, so typecheck and lint of
+      # the dependent workspaces fail with "Cannot find module '@dossier/core'".
+      # Build core up front to materialise the type entry point, then run the
+      # repo-wide checks.
+      - name: Build core
+        run: npm run build --workspace=packages/core
+
       - name: Lint
         run: npm run lint
 
@@ -33,9 +41,6 @@ jobs:
       - name: Test
         run: npm test --workspaces --if-present
 
-      - name: Build core
-        run: npm run build --workspace=packages/core
-
       - name: Build web app static export
         run: npm run build --workspace=apps/web
         env:
@@ -43,6 +48,9 @@ jobs:
 
       - name: Build MCP server
         run: npm run build --workspace=apps/mcp-server
+
+      - name: Verify MCP server end-to-end
+        run: node apps/mcp-server/scripts/verify-stdio.mjs
 
       - name: Upload web static export
         uses: actions/upload-artifact@v4
