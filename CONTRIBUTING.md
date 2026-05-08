@@ -5,7 +5,7 @@ Thanks for considering a contribution. This document covers the development setu
 ## Development setup
 
 ```bash
-git clone https://github.com/your-handle/dossier.git
+git clone https://github.com/Abdalla-Eldoumani/dossier.git
 cd dossier
 npm install
 ```
