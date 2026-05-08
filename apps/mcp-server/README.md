@@ -11,7 +11,7 @@ npm install -g @dossier/mcp-server
 Or run from the monorepo:
 
 ```bash
-git clone https://github.com/your-handle/dossier.git
+git clone https://github.com/Abdalla-Eldoumani/dossier.git
 cd dossier
 npm install
 npm run build --workspace=apps/mcp-server
