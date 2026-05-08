@@ -21,15 +21,21 @@ jobs:
           node-version: "20.18.0"
           cache: npm
 
-      # `npm ci` is the usual choice here, but it interacts badly with
-      # platform-specific optional dependencies when the lockfile was generated
-      # on a different OS (see https://github.com/npm/cli/issues/4828). Vitest 4
-      # pulls in rolldown, whose native binding ships as separate npm packages
-      # per platform, and `npm ci` skips the Linux one when the lockfile was
-      # authored on Windows. `npm install` resolves optional deps for the
-      # current platform regardless.
+      # npm honours the package-lock.json verbatim, including the platform-
+      # specific optional dependencies it recorded at lockfile-generation time.
+      # When the lockfile was generated on Windows, npm skips the Linux native
+      # binding for vitest 4's rolldown bundler (see npm/cli#4828) and the test
+      # step blows up with `Cannot find module '@rolldown/binding-linux-x64-gnu'`.
+      # The npm install runs first; the second step then forces the matching
+      # Linux binding into node_modules, reading the rolldown version dynamically
+      # so the workaround stays correct as the dep gets bumped.
       - name: Install dependencies
         run: npm install --no-audit --no-fund
+
+      - name: Install rolldown native binding for Linux (npm/cli#4828 workaround)
+        run: |
+          ROLLDOWN_VERSION=$(node -p "require('./node_modules/rolldown/package.json').version")
+          npm install --no-save --no-audit --no-fund "@rolldown/binding-linux-x64-gnu@${ROLLDOWN_VERSION}"
 
       # @dossier/core is consumed by both apps via its compiled `dist/index.d.ts`.
       # On a fresh checkout that file doesn't exist yet, so typecheck and lint of
