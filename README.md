@@ -42,7 +42,7 @@ Open `http://localhost:3000`. The app is a static export — `npm run build --wo
 
 The web app is a fully static Next.js export, so any static host works — your own domain via Vercel, Netlify, Cloudflare Pages, or even an `nginx` block pointing at `apps/web/out`.
 
-The repo ships a `vercel.json` with a strict Content-Security-Policy, HSTS, COOP/CORP, X-Frame-Options, Referrer-Policy `no-referrer`, a locked-down Permissions-Policy, and immutable cache headers for static assets. Vercel's build picks it up automatically from the repo root: connect the project, set the framework to "Other", and the output directory to `apps/web/out`.
+The web app ships its own `apps/web/vercel.json` with a strict Content-Security-Policy, HSTS, COOP/CORP, X-Frame-Options, Referrer-Policy `no-referrer`, a locked-down Permissions-Policy, and immutable cache headers for static assets. To deploy on Vercel: connect the repo and set **Root Directory** to `apps/web`. The build command walks up to the monorepo root to build `@dossier/core` first, then runs `next build` — no further setup needed. Bring your own domain.
 
 ## Run the MCP server
 
