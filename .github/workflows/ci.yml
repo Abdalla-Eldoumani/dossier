@@ -21,8 +21,15 @@ jobs:
           node-version: "20.18.0"
           cache: npm
 
+      # `npm ci` is the usual choice here, but it interacts badly with
+      # platform-specific optional dependencies when the lockfile was generated
+      # on a different OS (see https://github.com/npm/cli/issues/4828). Vitest 4
+      # pulls in rolldown, whose native binding ships as separate npm packages
+      # per platform, and `npm ci` skips the Linux one when the lockfile was
+      # authored on Windows. `npm install` resolves optional deps for the
+      # current platform regardless.
       - name: Install dependencies
-        run: npm ci
+        run: npm install --no-audit --no-fund
 
       # @dossier/core is consumed by both apps via its compiled `dist/index.d.ts`.
       # On a fresh checkout that file doesn't exist yet, so typecheck and lint of
