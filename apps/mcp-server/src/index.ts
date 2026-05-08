@@ -8,6 +8,8 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { registerAllTools } from "./tools/index.js";
+import { registerAllResources } from "./resources/index.js";
+import { registerAllPrompts } from "./prompts/index.js";
 import { log } from "./lib/log.js";
 
 async function main() {
@@ -17,6 +19,8 @@ async function main() {
   });
 
   registerAllTools(server);
+  registerAllResources(server);
+  registerAllPrompts(server);
 
   const transport = new StdioServerTransport();
   await server.connect(transport);
