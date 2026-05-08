@@ -72,7 +72,7 @@ export function Header() {
         </button>
 
         <a
-          href="https://github.com/your-handle/dossier"
+          href="https://github.com/Abdalla-Eldoumani/dossier"
           target="_blank"
           rel="noreferrer"
           className={cn(
