@@ -32,13 +32,17 @@ Diagnostics: page count, file size breakdown, font inventory, embedded resource 
 ## Run the web app locally
 
 ```bash
-git clone https://github.com/your-handle/dossier.git
-cd dossier
 npm install
 npm run dev --workspace=apps/web
 ```
 
 Open `http://localhost:3000`. The app is a static export — `npm run build --workspace=apps/web` produces a folder you can serve from anywhere, or open straight from disk.
+
+## Deploy the web app
+
+The web app is a fully static Next.js export, so any static host works — your own domain via Vercel, Netlify, Cloudflare Pages, or even an `nginx` block pointing at `apps/web/out`.
+
+The repo ships a `vercel.json` with a strict Content-Security-Policy, HSTS, COOP/CORP, X-Frame-Options, Referrer-Policy `no-referrer`, a locked-down Permissions-Policy, and immutable cache headers for static assets. Vercel's build picks it up automatically from the repo root: connect the project, set the framework to "Other", and the output directory to `apps/web/out`.
 
 ## Run the MCP server
 
