@@ -8,7 +8,7 @@
 // downsampleImages, runOcr, pdfToImages, optional JpegRecompressor for compressPdf, optional
 // PdfRepairer for repair) are exposed here as bare passthroughs. Browser-side providers
 // (OffscreenCanvas-based encoders, tesseract.js, qpdf-wasm, PDFium-WASM) wire up alongside
-// each operation's UI view as the corresponding TASKS.md task is addressed.
+// each operation's UI view as that view is built.
 
 import * as Comlink from "comlink";
 import {
