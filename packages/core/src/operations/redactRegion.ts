@@ -21,8 +21,6 @@
 //     Q). pdf-lib's drawText output never nests.
 //   - Text positioned via rotated/skewed text matrices: the check uses the
 //     translation component only.
-//
-// See .agent/EDGE_CASES.md for the broader policy.
 
 import { z } from "zod";
 import { PDFArray, PDFName, PDFRawStream, PDFRef, decodePDFRawStream, rgb } from "pdf-lib";
